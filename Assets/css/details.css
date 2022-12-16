@@ -1,0 +1,34 @@
+main{
+    background-color: #000;
+    border-radius: 8px;
+}
+.container-sm{
+    padding: 10px;
+}
+.card{
+    width: 20rem;
+    cursor: pointer;
+}
+.ttl, .txt{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.review-container{
+    max-height: 650px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.review-container::-webkit-scrollbar{
+    width: 0px;
+}
+.review-body{
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+.reviewer-name{
+    text-align: right;
+}

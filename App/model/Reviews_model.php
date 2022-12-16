@@ -11,9 +11,9 @@ class Reviews_model extends Database
         $statement = self::$conn->prepare(
             '
             SELECT 
-            reviewer.firstName, reviewer.lastName, reviewer.email, reviewer.password,
-            games.title, games.genre, games.release_date,
-            reviews.review, reviews.verdict, reviews.createdAt, reviews.updatedAt
+            reviews.reviewer_id, reviewer.firstName, reviewer.lastName, reviewer.email, reviewer.password,
+            reviews.games_id ,games.title,  games.genre, games.cover, games.developer, games.publisher, games.release_date,
+            reviews.id, reviews.review, reviews.verdict, reviews.createdAt, reviews.updatedAt
             FROM reviews
             INNER JOIN reviewer ON reviews.reviewer_id = reviewer.id
             INNER JOIN games ON reviews.games_id = games.id
@@ -26,7 +26,18 @@ class Reviews_model extends Database
 
     public function whereId($id)
     {
-        $statement = self::$conn->prepare('SELECT * FROM reviews WHERE id = :id');
+        $statement = self::$conn->prepare(
+            '
+            SELECT 
+            reviews.reviewer_id, reviewer.firstName, reviewer.lastName, reviewer.email, reviewer.password,
+            reviews.games_id ,games.title,  games.genre, games.cover, games.developer, games.publisher, games.release_date,
+            reviews.id, reviews.review, reviews.verdict, reviews.createdAt, reviews.updatedAt
+            FROM reviews
+            INNER JOIN reviewer ON reviews.reviewer_id = reviewer.id
+            INNER JOIN games ON reviews.games_id = games.id
+            WHERE games.id = :id
+            '
+        );
         $statement->execute(['id' => $id]);
 
         return $statement->fetch(\PDO::FETCH_OBJ);

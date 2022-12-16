@@ -3,6 +3,7 @@
 namespace Staditek\App\controller;
 
 use Staditek\App\core\Router;
+use Staditek\App\core\View;
 use Staditek\App\model\Reviewer_model;
 
 class Reviewer_controller
@@ -15,54 +16,35 @@ class Reviewer_controller
         self::$reviewer = new Reviewer_model;
     }
 
-    public function view()
+    public function signUp()
     {
-        $data = self::$reviewerData = self::$reviewer->getAll();
-        var_dump($data);
-    }
-
-    public function add()
-    {
+        View::only('reviewer/signUp', self::$reviewerData);
     }
 
     public function save()
     {
         $data = [
-            'firstName' => 'Ucup',
-            'lastName' => 'Ucub',
-            'email' => 'ucup_bin_ucub1403@gmail.com',
-            'password' => '12345654'
+            'firstName' => $_POST['firstName'],
+            'lastName' => $_POST['lastName'],
+            'email' => $_POST['email'],
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
         ];
 
         if (self::$reviewer->insert($data)) {
-            Router::redirect('Public/reviewer/view');
+            Router::redirect('Public/log-in');
         }
     }
 
-    public function edit($id)
+    public function logIn()
+    {
+        View::only('reviewer/logIn', self::$reviewerData);
+    }
+
+    public function verif()
     {
     }
 
-    public function update()
+    public function logOut()
     {
-        $data = [
-            'id' => '5',
-            'firstName' => 'testUpdate',
-            'lastName' => 'updateOne',
-            'email' => 'update@example.com',
-            'password' => 'up2date',
-            'updatedAt' => date('Y-m-d H:i:s')
-        ];
-
-        if (self::$reviewer->update($data)) {
-            Router::redirect('Public/reviewer/view');
-        }
-    }
-
-    public function delete($id)
-    {
-        if(self::$reviewer->delete($id)){
-            Router::redirect('Public/reviewer/view');
-        }
     }
 }

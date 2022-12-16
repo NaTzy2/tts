@@ -1,0 +1,47 @@
+main{
+    background-color: black;
+    padding: 5px 20px;
+    border-radius: 4px;
+}
+.genre{
+    margin-bottom: 50px;
+}
+.games-wrapper{
+    max-height: 100%;
+    display: flex;
+    overflow-x: auto;
+}
+.games-wrapper::-webkit-scrollbar{
+    width: 0px;
+}
+.games-wrapper .games{
+    max-width:14rem;
+    height: 100%;
+    margin: auto 15px;  
+}
+.card{
+    width: 14rem;
+    /* cursor: pointer;  */
+}
+.card:hover{
+    box-shadow: 0 10px 20px #8888884e;
+}
+.ttl{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.btn-details{
+    margin-top: 5px;
+    padding: 4px 15px;
+    border: 1px solid #ffc107;
+    border-radius: 7px;
+    background-color: #212529;
+    color: #ffc107;
+    transition: all 0.35s ease;
+}
+.btn-details:hover{
+    padding: 4px 65px;
+    background-color: #ffc107;
+    color: #212529;
+}
